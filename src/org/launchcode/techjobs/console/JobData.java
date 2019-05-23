@@ -57,12 +57,12 @@ public class JobData {
     /**
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
-     *
+     * <p>
      * For example, searching for employer "Enterprise" will include results
      * with "Enterprise Holdings, Inc".
      *
-     * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
+     * @param column Column that should be searched.
+     * @param value  Value of teh field to search for
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
@@ -83,6 +83,63 @@ public class JobData {
 
         return jobs;
     }
+
+
+    /**
+     * enable a search that looks for the search term in all of the columns
+     * // results do not include duplicate listings
+     * // write so you can add columns and not rewrite this method (nested loop like printJobs?)
+     * // Use lopps and collection methods - DO NOT call findbyColumnAndValue method
+     */
+    public static ArrayList<HashMap<String, String>> findbyValue(String value) {
+
+        value = value.toLowerCase();
+
+        // load data, if not already loaded
+        loadData();
+
+        //HashSet valueSet = new HashSet();
+        //set.add();
+        //set.add();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        // also returns duplicates, but now fewer...
+        for (HashMap<String, String> cell : allJobs) {
+            for (String i : cell.keySet()) {
+                if (cell.get(i).toLowerCase().contains(value)) {
+                    jobs.add(cell);
+                }
+            }
+        }
+        return jobs;
+    }
+
+
+
+
+
+
+    /**
+     * returns duplicates
+
+     ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+     for (HashMap<String, String> row : allJobs) {
+
+     String bValue = row.get(value);
+
+     if (bValue.contains(value)) {
+     jobs.add(row);
+     }
+     }
+
+     return jobs;
+     */
+
+
+
+
+
 
     /**
      * Read in data from a CSV file and store it in a list
@@ -126,3 +183,5 @@ public class JobData {
     }
 
 }
+
+

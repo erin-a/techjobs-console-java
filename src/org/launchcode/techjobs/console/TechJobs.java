@@ -61,7 +61,8 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findbyValue(searchTerm));
+                    //System.out.println("Search all fields not yet implemented.");
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -111,6 +112,31 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        // implement this method, should print out key/value pairs for each column
+
+        //if there is anying in someJobs
+        if (someJobs.size() > 0)
+        {
+            // pro tip said to do a nested loop if there are columns added in future
+            for (HashMap<String, String> i : someJobs) {
+                System.out.println("\n*****");
+                // for key in column
+                for (String key : i.keySet()) {
+                    // print key ':' job detail
+                    System.out.println(key + ": " + i.get(key));
+                }
+                System.out.println("*****");
+            }
+        }
+                // this pulled the data but it wasn't organized the way the directions wanted
+                //for (int i = 0; i < someJobs.size(); i++){
+                    //System.out.println(someJobs.get(i));
+                //}
+         else {
+             System.out.println(
+                     "\n•••  No jobs match your search criteria.  •••\n");
+        }
+
+        //System.out.println("printJobs is not implemented yet");
     }
 }
